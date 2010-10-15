@@ -1,0 +1,7 @@
+this is just a simple test.
+
+it uses the nDistro format, so you should just be able to check it out
+and run 'ndistro'.
+
+run the app with "./bin/node app.js"
+

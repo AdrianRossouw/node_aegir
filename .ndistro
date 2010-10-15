@@ -1,0 +1,5 @@
+node 0.2.1
+
+module sidorares nodejs-mysql-native 0.4.2
+module Slashed daemon.node
+
