@@ -65,7 +65,19 @@ function run_task(task) {
 function drush_exec(context, command, args, options, callback) {
   args = (args != undefined) ? args : []
   options = (options != undefined) ? options : {}
-  child = exec('drush @' + context + ' ' + command + ' ' + args.join(' ') + ' -b', 
+  var option_string = ' ';
+
+  for (key in options) {
+    var ret = ''
+    ret = options[key].replace(/[^\\]'/g, function(m, i, s) {
+            return m.slice(0, 1)+'\\\'';
+    });
+    option_string = option_string+' --'+key+"='"+ret+"'";
+  }
+
+  command = 'drush @' + context + ' ' + command + ' ' + args.join(' ') + option_string +' -b';
+  console.log("Executing " + command)
+  child = exec( command, { maxBuffer : Number.MAX_VALUE },
     function (error, stdout, stderr) {
       if (error !== null) {
         console.log('exec error: ' + error);
